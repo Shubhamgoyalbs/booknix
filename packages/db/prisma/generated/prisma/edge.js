@@ -92,7 +92,126 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.AccountScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  firstName: 'firstName',
+  password: 'password',
+  lastName: 'lastName',
+  refreshToken: 'refreshToken',
+  isVerified: 'isVerified',
+  avatarUrl: 'avatarUrl',
+  role: 'role',
+  walletId: 'walletId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.WalletScalarFieldEnum = {
+  id: 'id',
+  totalBalance: 'totalBalance',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TransactionScalarFieldEnum = {
+  id: 'id',
+  walletId: 'walletId',
+  amount: 'amount',
+  currency: 'currency',
+  type: 'type',
+  status: 'status',
+  description: 'description',
+  metadata: 'metadata',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.UserScalarFieldEnum = {
+  id: 'id',
+  accountId: 'accountId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.OrganizationScalarFieldEnum = {
+  id: 'id',
+  organizationName: 'organizationName',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.OrganizerScalarFieldEnum = {
+  id: 'id',
+  accountId: 'accountId',
+  organizationId: 'organizationId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.EventScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  bannerUrl: 'bannerUrl',
+  gallery: 'gallery',
+  location: 'location',
+  venue: 'venue',
+  currency: 'currency',
+  onDate: 'onDate',
+  timezone: 'timezone',
+  duration: 'duration',
+  eventType: 'eventType',
+  eventStatus: 'eventStatus',
+  organizationId: 'organizationId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ReviewScalarFieldEnum = {
+  id: 'id',
+  rating: 'rating',
+  message: 'message',
+  eventId: 'eventId',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TicketTypeScalarFieldEnum = {
+  id: 'id',
+  eventId: 'eventId',
+  name: 'name',
+  description: 'description',
+  total: 'total',
+  locked: 'locked',
+  booked: 'booked',
+  price: 'price',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.NotificationScalarFieldEnum = {
+  id: 'id'
+};
+
+exports.Prisma.BookingScalarFieldEnum = {
+  id: 'id'
+};
+
+exports.Prisma.BookingItemScalarFieldEnum = {
+  id: 'id'
+};
+
+exports.Prisma.LockedTicketScalarFieldEnum = {
+  id: 'id'
+};
+
+exports.Prisma.LockedItemScalarFieldEnum = {
+  id: 'id'
+};
+
+exports.Prisma.EventTicketCheckerScalarFieldEnum = {
   id: 'id'
 };
 
@@ -101,14 +220,84 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
+};
+
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
+exports.Currency = exports.$Enums.Currency = {
+  INR: 'INR',
+  USD: 'USD',
+  EURO: 'EURO'
+};
+
+exports.Role = exports.$Enums.Role = {
+  USER: 'USER',
+  ORGANIZER: 'ORGANIZER'
+};
+
+exports.EventType = exports.$Enums.EventType = {
+  CONCERT: 'CONCERT',
+  COMEDY: 'COMEDY',
+  SPORTS: 'SPORTS',
+  THEATER: 'THEATER',
+  CONFERENCE: 'CONFERENCE',
+  WORKSHOP: 'WORKSHOP',
+  FESTIVAL: 'FESTIVAL'
+};
+
+exports.EventStatus = exports.$Enums.EventStatus = {
+  DRAFT: 'DRAFT',
+  OPEN: 'OPEN',
+  BOOKING_STARTED: 'BOOKING_STARTED',
+  CANCELLED: 'CANCELLED',
+  CLOSED: 'CLOSED'
+};
+
+exports.TransactionType = exports.$Enums.TransactionType = {
+  CREDIT: 'CREDIT',
+  DEBIT: 'DEBIT',
+  REFUND: 'REFUND'
+};
+
+exports.TransactionStatus = exports.$Enums.TransactionStatus = {
+  PENDING: 'PENDING',
+  COMPLETED: 'COMPLETED',
+  FAILED: 'FAILED',
+  CANCELLED: 'CANCELLED'
+};
 
 exports.Prisma.ModelName = {
-  User: 'User'
+  Account: 'Account',
+  Wallet: 'Wallet',
+  Transaction: 'Transaction',
+  User: 'User',
+  Organization: 'Organization',
+  Organizer: 'Organizer',
+  Event: 'Event',
+  Review: 'Review',
+  TicketType: 'TicketType',
+  Notification: 'Notification',
+  Booking: 'Booking',
+  BookingItem: 'BookingItem',
+  LockedTicket: 'LockedTicket',
+  LockedItem: 'LockedItem',
+  EventTicketChecker: 'EventTicketChecker'
 };
 /**
  * Create the Client
@@ -118,10 +307,10 @@ const config = {
   "clientVersion": "7.3.0",
   "engineVersion": "9d6ad21cbbceab97458517b147a6a09ff43aa735",
   "activeProvider": "postgresql",
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"./generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel User {\n  id String @id @default(cuid())\n}\n"
+  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"./generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\n//----// Enums\n\nenum Currency {\n  INR\n  USD\n  EURO\n}\n\nenum Role {\n  USER\n  ORGANIZER\n}\n\nenum EventType {\n  CONCERT\n  COMEDY\n  SPORTS\n  THEATER\n  CONFERENCE\n  WORKSHOP\n  FESTIVAL\n}\n\nenum EventStatus {\n  DRAFT\n  OPEN\n  BOOKING_STARTED\n  CANCELLED\n  CLOSED\n}\n\nenum TransactionType {\n  CREDIT\n  DEBIT\n  REFUND\n}\n\nenum TransactionStatus {\n  PENDING\n  COMPLETED\n  FAILED\n  CANCELLED\n}\n\n//----// Models\n\nmodel Account {\n  id           String   @id @default(cuid())\n  email        String   @unique\n  firstName    String\n  password     String\n  lastName     String\n  refreshToken String?\n  isVerified   Boolean  @default(false)\n  avatarUrl    String\n  role         Role\n  walletId     String   @unique\n  wallet       Wallet   @relation(fields: [walletId], references: [id])\n  createdAt    DateTime @default(now())\n  updatedAt    DateTime @updatedAt\n\n  user      User?\n  organizer Organizer?\n}\n\nmodel Wallet {\n  id           String        @id @default(cuid())\n  account      Account?\n  totalBalance Int           @default(0)\n  transactions Transaction[]\n  createdAt    DateTime      @default(now())\n  updatedAt    DateTime      @updatedAt\n}\n\nmodel Transaction {\n  id          String            @id @default(cuid())\n  walletId    String\n  wallet      Wallet            @relation(fields: [walletId], references: [id])\n  amount      Float\n  currency    Currency\n  type        TransactionType\n  status      TransactionStatus @default(PENDING)\n  description String?\n  metadata    Json? // for additional flexible data\n  createdAt   DateTime          @default(now())\n  updatedAt   DateTime          @updatedAt\n  // todo\n}\n\nmodel User {\n  id        String   @id @default(cuid())\n  accountId String   @unique\n  account   Account  @relation(fields: [accountId], references: [id])\n  reviews   Review[]\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nmodel Organization {\n  id               String      @id @default(cuid())\n  organizationName String      @unique\n  members          Organizer[]\n  events           Event[]\n  createdAt        DateTime    @default(now())\n  updatedAt        DateTime    @updatedAt\n}\n\nmodel Organizer {\n  id             String       @id @default(cuid())\n  accountId      String       @unique\n  organizationId String\n  organization   Organization @relation(fields: [organizationId], references: [id])\n  account        Account      @relation(fields: [accountId], references: [id])\n  createdAt      DateTime     @default(now())\n  updatedAt      DateTime     @updatedAt\n}\n\nmodel Event {\n  id             String       @id @default(cuid())\n  title          String\n  description    String\n  bannerUrl      String?\n  gallery        String[] // array of image URLs\n  location       String\n  venue          String\n  currency       Currency\n  onDate         DateTime\n  timezone       String\n  duration       Float\n  eventType      EventType\n  eventStatus    EventStatus  @default(DRAFT)\n  organizationId String\n  organization   Organization @relation(fields: [organizationId], references: [id])\n  ticketTypes    TicketType[]\n  reviews        Review[]\n  createdAt      DateTime     @default(now())\n  updatedAt      DateTime     @updatedAt\n}\n\nmodel Review {\n  id        String   @id @default(cuid())\n  rating    Int\n  message   String?\n  eventId   String\n  event     Event    @relation(fields: [eventId], references: [id])\n  userId    String\n  user      User     @relation(fields: [userId], references: [id])\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@unique([userId, eventId])\n}\n\nmodel TicketType {\n  id          String   @id @default(cuid())\n  eventId     String\n  event       Event    @relation(fields: [eventId], references: [id])\n  name        String\n  description String?\n  total       Int\n  locked      Int      @default(0)\n  booked      Int      @default(0)\n  price       Float\n  createdAt   DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n}\n\nmodel Notification {\n  id String @id @default(cuid())\n  // todo\n}\n\nmodel Booking {\n  id String @id @default(cuid())\n  // todo\n}\n\nmodel BookingItem {\n  id String @id @default(cuid())\n  // todo\n}\n\nmodel LockedTicket {\n  id String @id @default(cuid())\n  // todo\n}\n\nmodel LockedItem {\n  id String @id @default(cuid())\n  // todo\n}\n\nmodel EventTicketChecker {\n  id String @id @default(cuid())\n  // todo\n}\n"
 }
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"Account\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"firstName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"lastName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"refreshToken\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"isVerified\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"avatarUrl\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role\",\"kind\":\"enum\",\"type\":\"Role\"},{\"name\":\"walletId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"wallet\",\"kind\":\"object\",\"type\":\"Wallet\",\"relationName\":\"AccountToWallet\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"AccountToUser\"},{\"name\":\"organizer\",\"kind\":\"object\",\"type\":\"Organizer\",\"relationName\":\"AccountToOrganizer\"}],\"dbName\":null},\"Wallet\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"account\",\"kind\":\"object\",\"type\":\"Account\",\"relationName\":\"AccountToWallet\"},{\"name\":\"totalBalance\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"transactions\",\"kind\":\"object\",\"type\":\"Transaction\",\"relationName\":\"TransactionToWallet\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Transaction\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"walletId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"wallet\",\"kind\":\"object\",\"type\":\"Wallet\",\"relationName\":\"TransactionToWallet\"},{\"name\":\"amount\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"currency\",\"kind\":\"enum\",\"type\":\"Currency\"},{\"name\":\"type\",\"kind\":\"enum\",\"type\":\"TransactionType\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"TransactionStatus\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"metadata\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"accountId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"account\",\"kind\":\"object\",\"type\":\"Account\",\"relationName\":\"AccountToUser\"},{\"name\":\"reviews\",\"kind\":\"object\",\"type\":\"Review\",\"relationName\":\"ReviewToUser\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Organization\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organizationName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"members\",\"kind\":\"object\",\"type\":\"Organizer\",\"relationName\":\"OrganizationToOrganizer\"},{\"name\":\"events\",\"kind\":\"object\",\"type\":\"Event\",\"relationName\":\"EventToOrganization\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Organizer\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"accountId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organizationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organization\",\"kind\":\"object\",\"type\":\"Organization\",\"relationName\":\"OrganizationToOrganizer\"},{\"name\":\"account\",\"kind\":\"object\",\"type\":\"Account\",\"relationName\":\"AccountToOrganizer\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Event\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"bannerUrl\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"gallery\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"location\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"venue\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"currency\",\"kind\":\"enum\",\"type\":\"Currency\"},{\"name\":\"onDate\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"timezone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"duration\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"eventType\",\"kind\":\"enum\",\"type\":\"EventType\"},{\"name\":\"eventStatus\",\"kind\":\"enum\",\"type\":\"EventStatus\"},{\"name\":\"organizationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organization\",\"kind\":\"object\",\"type\":\"Organization\",\"relationName\":\"EventToOrganization\"},{\"name\":\"ticketTypes\",\"kind\":\"object\",\"type\":\"TicketType\",\"relationName\":\"EventToTicketType\"},{\"name\":\"reviews\",\"kind\":\"object\",\"type\":\"Review\",\"relationName\":\"EventToReview\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Review\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"rating\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"message\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"eventId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"event\",\"kind\":\"object\",\"type\":\"Event\",\"relationName\":\"EventToReview\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"ReviewToUser\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"TicketType\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"eventId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"event\",\"kind\":\"object\",\"type\":\"Event\",\"relationName\":\"EventToTicketType\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"total\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"locked\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"booked\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"price\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Notification\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"Booking\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"BookingItem\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"LockedTicket\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"LockedItem\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"EventTicketChecker\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.compilerWasm = {
   getRuntime: async () => require('./query_compiler_fast_bg.js'),

@@ -7,6 +7,199 @@ datasource db {
   provider = "postgresql"
 }
 
+//----// Enums
+
+enum Currency {
+  INR
+  USD
+  EURO
+}
+
+enum Role {
+  USER
+  ORGANIZER
+}
+
+enum EventType {
+  CONCERT
+  COMEDY
+  SPORTS
+  THEATER
+  CONFERENCE
+  WORKSHOP
+  FESTIVAL
+}
+
+enum EventStatus {
+  DRAFT
+  OPEN
+  BOOKING_STARTED
+  CANCELLED
+  CLOSED
+}
+
+enum TransactionType {
+  CREDIT
+  DEBIT
+  REFUND
+}
+
+enum TransactionStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  CANCELLED
+}
+
+//----// Models
+
+model Account {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  firstName    String
+  password     String
+  lastName     String
+  refreshToken String?
+  isVerified   Boolean  @default(false)
+  avatarUrl    String
+  role         Role
+  walletId     String   @unique
+  wallet       Wallet   @relation(fields: [walletId], references: [id])
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  user      User?
+  organizer Organizer?
+}
+
+model Wallet {
+  id           String        @id @default(cuid())
+  account      Account?
+  totalBalance Int           @default(0)
+  transactions Transaction[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model Transaction {
+  id          String            @id @default(cuid())
+  walletId    String
+  wallet      Wallet            @relation(fields: [walletId], references: [id])
+  amount      Float
+  currency    Currency
+  type        TransactionType
+  status      TransactionStatus @default(PENDING)
+  description String?
+  metadata    Json? // for additional flexible data
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  // todo
+}
+
 model User {
+  id        String   @id @default(cuid())
+  accountId String   @unique
+  account   Account  @relation(fields: [accountId], references: [id])
+  reviews   Review[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Organization {
+  id               String      @id @default(cuid())
+  organizationName String      @unique
+  members          Organizer[]
+  events           Event[]
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+}
+
+model Organizer {
+  id             String       @id @default(cuid())
+  accountId      String       @unique
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  account        Account      @relation(fields: [accountId], references: [id])
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+}
+
+model Event {
+  id             String       @id @default(cuid())
+  title          String
+  description    String
+  bannerUrl      String?
+  gallery        String[] // array of image URLs
+  location       String
+  venue          String
+  currency       Currency
+  onDate         DateTime
+  timezone       String
+  duration       Float
+  eventType      EventType
+  eventStatus    EventStatus  @default(DRAFT)
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  ticketTypes    TicketType[]
+  reviews        Review[]
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  rating    Int
+  message   String?
+  eventId   String
+  event     Event    @relation(fields: [eventId], references: [id])
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, eventId])
+}
+
+model TicketType {
+  id          String   @id @default(cuid())
+  eventId     String
+  event       Event    @relation(fields: [eventId], references: [id])
+  name        String
+  description String?
+  total       Int
+  locked      Int      @default(0)
+  booked      Int      @default(0)
+  price       Float
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Notification {
   id String @id @default(cuid())
+  // todo
+}
+
+model Booking {
+  id String @id @default(cuid())
+  // todo
+}
+
+model BookingItem {
+  id String @id @default(cuid())
+  // todo
+}
+
+model LockedTicket {
+  id String @id @default(cuid())
+  // todo
+}
+
+model LockedItem {
+  id String @id @default(cuid())
+  // todo
+}
+
+model EventTicketChecker {
+  id String @id @default(cuid())
+  // todo
 }

@@ -120,7 +120,126 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.AccountScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  firstName: 'firstName',
+  password: 'password',
+  lastName: 'lastName',
+  refreshToken: 'refreshToken',
+  isVerified: 'isVerified',
+  avatarUrl: 'avatarUrl',
+  role: 'role',
+  walletId: 'walletId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.WalletScalarFieldEnum = {
+  id: 'id',
+  totalBalance: 'totalBalance',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TransactionScalarFieldEnum = {
+  id: 'id',
+  walletId: 'walletId',
+  amount: 'amount',
+  currency: 'currency',
+  type: 'type',
+  status: 'status',
+  description: 'description',
+  metadata: 'metadata',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.UserScalarFieldEnum = {
+  id: 'id',
+  accountId: 'accountId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.OrganizationScalarFieldEnum = {
+  id: 'id',
+  organizationName: 'organizationName',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.OrganizerScalarFieldEnum = {
+  id: 'id',
+  accountId: 'accountId',
+  organizationId: 'organizationId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.EventScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  bannerUrl: 'bannerUrl',
+  gallery: 'gallery',
+  location: 'location',
+  venue: 'venue',
+  currency: 'currency',
+  onDate: 'onDate',
+  timezone: 'timezone',
+  duration: 'duration',
+  eventType: 'eventType',
+  eventStatus: 'eventStatus',
+  organizationId: 'organizationId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ReviewScalarFieldEnum = {
+  id: 'id',
+  rating: 'rating',
+  message: 'message',
+  eventId: 'eventId',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TicketTypeScalarFieldEnum = {
+  id: 'id',
+  eventId: 'eventId',
+  name: 'name',
+  description: 'description',
+  total: 'total',
+  locked: 'locked',
+  booked: 'booked',
+  price: 'price',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.NotificationScalarFieldEnum = {
+  id: 'id'
+};
+
+exports.Prisma.BookingScalarFieldEnum = {
+  id: 'id'
+};
+
+exports.Prisma.BookingItemScalarFieldEnum = {
+  id: 'id'
+};
+
+exports.Prisma.LockedTicketScalarFieldEnum = {
+  id: 'id'
+};
+
+exports.Prisma.LockedItemScalarFieldEnum = {
+  id: 'id'
+};
+
+exports.Prisma.EventTicketCheckerScalarFieldEnum = {
   id: 'id'
 };
 
@@ -129,14 +248,84 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
+};
+
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
+exports.Role = exports.$Enums.Role = {
+  USER: 'USER',
+  ORGANIZER: 'ORGANIZER'
+};
+
+exports.Currency = exports.$Enums.Currency = {
+  INR: 'INR',
+  USD: 'USD',
+  EURO: 'EURO'
+};
+
+exports.TransactionType = exports.$Enums.TransactionType = {
+  CREDIT: 'CREDIT',
+  DEBIT: 'DEBIT',
+  REFUND: 'REFUND'
+};
+
+exports.TransactionStatus = exports.$Enums.TransactionStatus = {
+  PENDING: 'PENDING',
+  COMPLETED: 'COMPLETED',
+  FAILED: 'FAILED',
+  CANCELLED: 'CANCELLED'
+};
+
+exports.EventType = exports.$Enums.EventType = {
+  CONCERT: 'CONCERT',
+  COMEDY: 'COMEDY',
+  SPORTS: 'SPORTS',
+  THEATER: 'THEATER',
+  CONFERENCE: 'CONFERENCE',
+  WORKSHOP: 'WORKSHOP',
+  FESTIVAL: 'FESTIVAL'
+};
+
+exports.EventStatus = exports.$Enums.EventStatus = {
+  DRAFT: 'DRAFT',
+  OPEN: 'OPEN',
+  BOOKING_STARTED: 'BOOKING_STARTED',
+  CANCELLED: 'CANCELLED',
+  CLOSED: 'CLOSED'
+};
 
 exports.Prisma.ModelName = {
-  User: 'User'
+  Account: 'Account',
+  Wallet: 'Wallet',
+  Transaction: 'Transaction',
+  User: 'User',
+  Organization: 'Organization',
+  Organizer: 'Organizer',
+  Event: 'Event',
+  Review: 'Review',
+  TicketType: 'TicketType',
+  Notification: 'Notification',
+  Booking: 'Booking',
+  BookingItem: 'BookingItem',
+  LockedTicket: 'LockedTicket',
+  LockedItem: 'LockedItem',
+  EventTicketChecker: 'EventTicketChecker'
 };
 
 /**
